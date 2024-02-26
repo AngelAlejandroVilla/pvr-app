@@ -105,28 +105,28 @@ export default defineComponent({
       activeTab.value = tabName;
       switch (tabName) {
         case "alquilar":
-          yatesTab.value.classList.remove("active");
-          rentTab.value.classList.remove("active")
-          alquilarTab.value.classList.add("active")
-          yatesContent.value.classList.remove("show", "active")
-          rentContent.value.classList.remove("show", "active")
-          alquilarContent.value.classList.add("show", "active")
+          if (alquilarTab.value) alquilarTab.value.classList.add("active");
+          if (yatesTab.value) yatesTab.value.classList.remove("active");
+          if (rentTab.value) rentTab.value.classList.remove("active");
+          if (alquilarContent.value) alquilarContent.value.classList.add("show", "active");
+          if (yatesContent.value) yatesContent.value.classList.remove("show", "active");
+          if (rentContent.value) rentContent.value.classList.remove("show", "active");
           break;
         case "yates":
-          alquilarTab.value.classList.remove("active")
-          rentTab.value.classList.remove("active")
-          yatesTab.value.classList.add("active")
-          alquilarContent.value.classList.remove("show", "active")
-          rentContent.value.classList.remove("show", "active")
-          yatesContent.value.classList.add("show", "active")
+          if (yatesTab.value) yatesTab.value.classList.add("active");
+          if (alquilarTab.value) alquilarTab.value.classList.remove("active");
+          if (rentTab.value) rentTab.value.classList.remove("active");
+          if (yatesContent.value) yatesContent.value.classList.add("show", "active");
+          if (alquilarContent.value) alquilarContent.value.classList.remove("show", "active");
+          if (rentContent.value) rentContent.value.classList.remove("show", "active");
           break;
         case "rent":
-          alquilarTab.value.classList.remove("active")
-          yatesTab.value.classList.remove("active")
-          rentTab.value.classList.add("active")
-          alquilarContent.value.classList.remove("show", "active")
-          yatesContent.value.classList.remove("show", "active")
-          rentContent.value.classList.add("show", "active")
+          if (rentTab.value) rentTab.value.classList.add("active");
+          if (alquilarTab.value) alquilarTab.value.classList.remove("active");
+          if (yatesTab.value) yatesTab.value.classList.remove("active");
+          if (rentContent.value) rentContent.value.classList.add("show", "active");
+          if (alquilarContent.value) alquilarContent.value.classList.remove("show", "active");
+          if (yatesContent.value) yatesContent.value.classList.remove("show", "active");
           break;
       }
     }

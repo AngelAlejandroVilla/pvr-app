@@ -14,7 +14,7 @@
                 <Field
                   type="text"
                   class="form-control form-control-solid"
-                  placeholder=""
+                  placeholder="Search"
                   name="Search"
                   v-model="Filtro.Search"
                 />
