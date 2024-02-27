@@ -2,7 +2,7 @@
     <div class="col-lg-4 col-md-6 col-12 mt-4 pt-2">
       <div class="card shop-list border-0 shadow position-relative overflow-hidden">
         <div class="shop-image position-relative overflow-hidden shadow">
-          <img :src="+++" class="img-fluid" alt="">
+          <img src="../../assets/images/real/property/1.jpg" class="img-fluid" alt="">
           <ul class="list-unstyled shop-icons">
             <li class="list-inline-item"><a href="javascript:void(0)" class="btn btn-icon btn-pills btn-primary"><i class="uil uil-estate"></i></a></li>
             <li class="list-inline-item"><a href="javascript:void(0)" class="btn btn-icon btn-pills btn-primary"><i class="uil uil-heart"></i></a></li>
@@ -43,7 +43,7 @@
     </div><!--end col-->
   </template>
   
-  <script>
+  <script lang="ts">
   export default {
     props: {
       imageSrc: {
@@ -85,4 +85,5 @@
     }
   };
   </script>
+
   
