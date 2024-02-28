@@ -4,111 +4,9 @@
   <!-- Hero End -->
   <section class="section">
     <Filtros />
-    <div class="container mt-100 mt-60">
-      <div class="row justify-content-center">
-        <div class="col-12">
-          <div class="section-title mb-4 pb-2 text-center">
-            <span class="badge rounded-pill bg-soft-primary">Process</span>
-            <h4 class="title mt-3 mb-4">How it work</h4>
-            <p class="text-muted para-desc mb-0 mx-auto">
-              Start working with
-              <span class="text-primary fw-bold">Landrick</span> that can
-              provide everything you need to generate awareness, drive traffic,
-              connect.
-            </p>
-          </div>
-        </div>
-        <!--end col-->
-      </div>
-      <!--end row-->
-
-      <div class="row">
-        <div class="col-lg-4 col-md-6 col-12 mt-4 pt-2">
-          <div
-            class="card border-0 text-center features feature-primary feature-clean rounded p-4"
-          >
-            <div class="icons text-center mx-auto">
-              <i class="uil uil-map-marker-plus rounded h3 mb-0"></i>
-            </div>
-
-            <div class="card-body p-0 mt-4">
-              <a href="javascript:void(0)" class="title h5 text-dark"
-                >Map Search</a
-              >
-              <p class="text-muted mt-3 mb-0">
-                Composed in a pseudo-Latin language which more or less
-                pseudo-Latin language corresponds.
-              </p>
-              <div class="mt-2">
-                <a href="javascript:void(0)" class="text-primary"
-                  >Read More
-                  <i data-feather="arrow-right" class="fea icon-sm"></i
-                ></a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!--end col-->
-
-        <div class="col-lg-4 col-md-6 col-12 mt-4 pt-2">
-          <div
-            class="card border-0 text-center features feature-primary feature-clean rounded p-4"
-          >
-            <div class="icons text-center mx-auto">
-              <i class="uil uil-estate rounded h3 mb-0"></i>
-            </div>
-
-            <div class="card-body p-0 mt-4">
-              <a href="javascript:void(0)" class="title h5 text-dark"
-                >Property Lookup</a
-              >
-              <p class="text-muted mt-3 mb-0">
-                Composed in a pseudo-Latin language which more or less
-                pseudo-Latin language corresponds.
-              </p>
-              <div class="mt-2">
-                <a href="javascript:void(0)" class="text-primary"
-                  >Read More
-                  <i data-feather="arrow-right" class="fea icon-sm"></i
-                ></a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!--end col-->
-
-        <div class="col-lg-4 col-md-6 col-12 mt-4 pt-2">
-          <div
-            class="card border-0 text-center features feature-primary feature-clean rounded p-4"
-          >
-            <div class="icons text-center mx-auto">
-              <i class="uil uil-house-user rounded h3 mb-0"></i>
-            </div>
-
-            <div class="card-body p-0 mt-4">
-              <a href="javascript:void(0)" class="title h5 text-dark"
-                >Buy / Sell Property</a
-              >
-              <p class="text-muted mt-3 mb-0">
-                Composed in a pseudo-Latin language which more or less
-                pseudo-Latin language corresponds.
-              </p>
-              <div class="mt-2">
-                <a href="javascript:void(0)" class="text-primary"
-                  >Read More
-                  <i data-feather="arrow-right" class="fea icon-sm"></i
-                ></a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!--end col-->
-      </div>
-      <!--end row-->
-    </div>
     <!--end container-->
 
-    <div class="container mt-100 mt-60">
+    <div class="container mt-20 mt-60">
       <div class="row justify-content-center">
         <div class="col-12">
           <div class="section-title mb-4 pb-2 text-center">
@@ -136,7 +34,7 @@
           :imageSrc="deps.imagen"
           :idDep="deps.idPropiedad"
           :address="deps.Nombre"
-          area="8000sqf"
+          :huespedes="deps.Huespedes"
           :beds="deps.Recamaras"
           :baths="deps.Baños"
           price="$5000"
@@ -208,7 +106,7 @@ export default defineComponent({
   setup() {
     const departamentos = ref<Departamentos[]>([]);
     const currentPage = ref(1);
-    const pageSize = 9;
+    const pageSize = 12;
     const propiedadSeleccionada = ref<Departamentos | null>(null);
 
     const refreshInfo = async () => {

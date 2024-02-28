@@ -1,5 +1,5 @@
 <template>
-  <div class="col-lg-4 col-md-6 col-12 mt-4 pt-2">
+  <div class="col-lg-3 col-md-6 col-12 mt-4 pt-2">
     <div
       @click="GoDetail()"
       style="cursor: pointer"
@@ -10,8 +10,8 @@
           :src="'http://pvrproperties.ai/imagenes/' + imageSrc"
           class="img-fluid"
           style="
-            width: 400px; /* Tamaño predeterminado de ancho */
-            height: auto;
+            width: 100%; /* Tamaño predeterminado de ancho */
+            height: 200px;
           "
           alt=""
         />
@@ -40,13 +40,13 @@
         </ul>
       </div>
       <div class="card-body content p-4">
-        <a class="text-dark product-name h6">{{ address }}</a>
+        <a class="text-dark product-name">{{ address }}</a>
         <ul
           class="list-unstyled mt-3 py-3 border-top border-bottom d-flex align-items-center"
         >
           <li class="d-flex align-items-center me-3">
-            <i class="uil uil-compress-arrows fs-5 me-1 text-primary"></i>
-            <span class="text-muted">{{ area }}</span>
+            <i class="uil uil-users-alt fs-5 me-1 text-primary"></i>
+            <span class="text-muted">{{ huespedes }}</span>
           </li>
           <li class="d-flex align-items-center me-3">
             <i class="uil uil-bed-double fs-5 me-1 text-primary"></i>
@@ -102,8 +102,8 @@ export default defineComponent({
       type: String,
       required: true,
     },
-    area: {
-      type: String,
+    huespedes: {
+      type: Number,
       required: true,
     },
     beds: {
