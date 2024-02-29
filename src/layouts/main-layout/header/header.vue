@@ -1,6 +1,6 @@
 <template>
   <!-- Navbar Start -->
-  <header id="topnav" class="defaultscroll sticky">
+  <header id="topnav" class="nav-sticky">
     <div class="container">
       <!-- Logo container-->
       <a class="logo" href="index.html">
@@ -159,12 +159,10 @@
   <!-- Navbar End -->
 </template>
 
-
 <script lang="ts">
 import { defineComponent, onMounted, ref } from "vue";
 
 export default defineComponent({
-  setup() {
-  },
+  setup() {},
 });
 </script>

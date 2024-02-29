@@ -1,20 +1,22 @@
 <template>
   <section class="bg-top-74 d-table w-100">
     <div class="container-fluid">
-      <div class="row">
+      <div v-if="loading" class="row">
         <div class="col-lg-6 p-1">
           <div
             class="work-container work-primary work-modern position-relative d-block overflow-hidden rounded"
           >
             <img
-              src="../assets/images/real/property/single/1.jpg"
+              :src="'http://pvrproperties.ai/imagenes/' + fotos[1].Fotografia"
               class="img-fluid rounded shadow"
               alt=""
             />
             <div class="overlay-work"></div>
             <div class="icons text-center">
               <a
-                href="../assets/images/real/property/single/1.jpg"
+                :href="
+                  'http://pvrproperties.ai/imagenes/' + fotos[1].Fotografia
+                "
                 class="work-icon bg-white d-inline-flex rounded-pill lightbox"
                 ><i data-feather="camera" class="fea icon-sm image-icon"></i
               ></a>
@@ -23,7 +25,7 @@
         </div>
         <!--end col-->
 
-        <div class="col-lg-6">
+        <div v-if="loading" class="col-lg-6">
           <div class="row">
             <div class="col-md-6">
               <div class="row">
@@ -32,7 +34,10 @@
                     class="work-container work-primary work-modern position-relative d-block overflow-hidden rounded"
                   >
                     <img
-                      src="../assets/images/real/property/single/2.jpg"
+                      :src="
+                        'http://pvrproperties.ai/imagenes/' +
+                        fotos[2].Fotografia
+                      "
                       class="img-fluid rounded shadow"
                       alt=""
                     />
@@ -56,8 +61,12 @@
                     class="work-container work-primary work-modern position-relative d-block overflow-hidden rounded"
                   >
                     <img
-                      src="../assets/images/real/property/single/3.jpg"
+                      :src="
+                        'http://pvrproperties.ai/imagenes/' +
+                        fotos[3].Fotografia
+                      "
                       class="img-fluid rounded shadow"
+                      style="width: 100%; height: 200px"
                       alt=""
                     />
                     <div class="overlay-work"></div>
@@ -86,7 +95,10 @@
                     class="work-container work-primary work-modern position-relative d-block overflow-hidden rounded"
                   >
                     <img
-                      src="../assets/images/real/property/single/4.jpg"
+                      :src="
+                        'http://pvrproperties.ai/imagenes/' +
+                        fotos[4].Fotografia
+                      "
                       class="img-fluid rounded shadow"
                       alt=""
                     />
@@ -110,7 +122,10 @@
                     class="work-container work-primary work-modern position-relative d-block overflow-hidden rounded"
                   >
                     <img
-                      src="../assets/images/real/property/single/5.jpg"
+                      :src="
+                        'http://pvrproperties.ai/imagenes/' +
+                        fotos[5].Fotografia
+                      "
                       class="img-fluid rounded shadow"
                       alt=""
                     />
@@ -180,9 +195,14 @@
                 <span class="text-muted fs-5">{{ propiedad?.Recamaras }}</span>
               </li>
 
-              <li class="d-flex align-items-center">
+              <li class="d-flex align-items-center me-3">
                 <i class="uil uil-bath fs-4 me-1 text-primary"></i>
                 <span class="text-muted fs-5">{{ propiedad?.Baños }}</span>
+              </li>
+
+              <li class="d-flex align-items-center me-3">
+                <i class="uil uil-moon fs-4 me-1 text-primary"></i>
+                <span class="text-muted fs-5">{{ propiedad?.minNoches }}</span>
               </li>
             </ul>
 
@@ -208,32 +228,12 @@
         <div class="col-lg-4 col-md-6 order-1 order-md-2">
           <div class="sticky-bar work-detail">
             <div class="p-4 rounded shadow">
-              <h4 class="title">Price:</h4>
-
               <ul class="list-unstyled mb-0">
-                <li class="mt-3 d-flex justify-content-between">
-                  <b class="fs-5">$ 45,231</b>
-                  <span class="text-primary fw-bold">For Sale</span>
-                </li>
-                <li class="mt-3 d-flex justify-content-between">
-                  <small class="text-muted">Huéspedes</small>
-                  <small class="fw-bold">{{ propiedad?.Huespedes }}</small>
-                </li>
-                <li class="mt-3 d-flex justify-content-between">
-                  <small class="text-muted">Recamaras</small>
-                  <small class="fw-bold">{{ propiedad?.Recamaras }}</small>
-                </li>
-                <li class="mt-3 d-flex justify-content-between">
-                  <small class="text-muted">Baños</small>
-                  <small class="fw-bold">{{ propiedad?.Baños }}</small>
-                </li>
-                <li class="mt-3 d-flex justify-content-between">
-                  <small class="text-muted">Noches mínimas</small>
-                  <small class="fw-bold">{{ propiedad?.minNoches }}</small>
-                </li>
-                <li class="mt-3 d-flex justify-content-between">
-                  <small class="text-muted">Tipo</small>
-                  <small class="fw-bold">{{ propiedad?.tipo }}</small>
+                <li class="mt-3 d-flex">
+                  <b class="fs-5">$ 45,231 MXN</b>
+                  <div class="my-auto fs-6" style="margin-left: 5px">
+                    <span class="">noche</span>
+                  </div>
                 </li>
               </ul>
             </div>
@@ -291,6 +291,7 @@ import { apiApp } from "@/core/api/apiApp";
 import { defineComponent, onMounted, ref, computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import servicesModal from "../components/modals/ServicesModal.vue";
+import type { Loading } from "element-plus/es/components/loading/src/service.mjs";
 
 export interface DepartamentoDetalle {
   idPropiedad: number;
@@ -320,31 +321,53 @@ export interface Caracteristica {
   Cantidad: string;
   idPropiedad: number;
 }
+export interface FotosPropiedad {
+  IdPropFotografia: number;
+  Descripcion: string;
+  Fotografia: string;
+  idPropiedad: number;
+}
 
 export default defineComponent({
   components: {
     servicesModal,
   },
+  props: {
+    imageSrc: {
+      type: String,
+      required: true,
+    },
+  },
   setup() {
     const route = useRoute();
     const propiedad = ref<DepartamentoDetalle>();
+    const fotos = ref<FotosPropiedad[]>([]);
     const isOpen = ref(false);
+    const loading = ref(false);
 
     function openDetalles() {
       isOpen.value = true;
     }
 
-    onMounted(() => {
+    onMounted(async () => {
       apiApp
         .get("propiedades/Caracteristicas/" + route.params.id)
         .then((data) => {
           propiedad.value = data.data;
+          loading.value = false;
+          apiApp.get("propiedades/imagenes/" + route.params.id).then((data) => {
+            fotos.value = data.data;
+            console.log(fotos.value);
+            loading.value = true;
+          });
         });
     });
     return {
       propiedad,
       isOpen,
       openDetalles,
+      fotos,
+      loading,
     };
   },
 });

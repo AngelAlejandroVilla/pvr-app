@@ -20,64 +20,55 @@
             <a
               href="javascript:void(0)"
               class="btn btn-icon btn-pills btn-primary"
-              ><i class="uil uil-estate"></i
-            ></a>
-          </li>
-          <li class="list-inline-item">
-            <a
-              href="javascript:void(0)"
-              class="btn btn-icon btn-pills btn-primary"
               ><i class="uil uil-heart"></i
-            ></a>
-          </li>
-          <li class="list-inline-item">
-            <a
-              href="javascript:void(0)"
-              class="btn btn-icon btn-pills btn-primary"
-              ><i class="uil uil-camera"></i
             ></a>
           </li>
         </ul>
       </div>
       <div class="card-body content p-4">
-        <a class="text-dark product-name">{{ address }}</a>
-        <ul
-          class="list-unstyled mt-3 py-3 border-top border-bottom d-flex align-items-center"
-        >
-          <li class="d-flex align-items-center me-3">
-            <i class="uil uil-users-alt fs-5 me-1 text-primary"></i>
-            <span class="text-muted">{{ huespedes }}</span>
-          </li>
-          <li class="d-flex align-items-center me-3">
-            <i class="uil uil-bed-double fs-5 me-1 text-primary"></i>
-            <span class="text-muted">{{ beds }}</span>
-          </li>
-          <li class="d-flex align-items-center">
-            <i class="uil uil-bath fs-5 me-1 text-primary"></i>
-            <span class="text-muted">{{ baths }}</span>
-          </li>
-        </ul>
-        <ul class="list-unstyled d-flex justify-content-between mt-2 mb-0">
-          <li class="list-inline-item mb-0">
-            <span class="text-muted">Price</span>
-            <p class="fw-semibold mb-0">{{ price }}</p>
-          </li>
-          <li class="list-inline-item mb-0 text-muted">
-            <span class="text-muted">Rating</span>
-            <ul class="fw-semibold text-warning list-unstyled mb-0">
-              <li
-                class="list-inline-item mb-0"
-                v-for="n in Math.ceil(rating)"
-                :key="n"
-              >
-                <i class="mdi mdi-star"></i>
-              </li>
+        <div class="row">
+          <div class="col-md-8">
+            <ul class="list-unstyled">
               <li class="list-inline-item mb-0 text-dark">
-                {{ rating }} ({{ reviews }})
+                <a class="custom-titulo">{{ address.toLocaleLowerCase() }}</a>
               </li>
             </ul>
-          </li>
-        </ul>
+          </div>
+          <div class="col-md-4">
+            <ul class="list-unstyled">
+              <li class="list-inline-item mb-0 text-dark">
+                <i class="mdi mdi-star"></i>
+                <span>{{ rating }}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4">
+            <ul class="list-unstyled d-flex justify-content-between mt-2 mb-0">
+              <li class="list-inline-item mb-0">
+                <p class="fw-semibold mb-0">{{ price }}</p>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-8 my-auto">
+            <ul class="list-unstyled d-flex justify-content-between mt-2 mb-0">
+              <li class="d-flex align-items-center me-3">
+                <i class="uil uil-users-alt fs-6 me-1 text-secondary"></i>
+                <span class="text-muted fw-bold">{{ huespedes }}</span>
+              </li>
+              <li class="d-flex align-items-center me-3">
+                <i class="uil uil-bed-double fs-6 me-1 text-secondary"></i>
+                <span class="text-muted fw-bold">{{ beds }}</span>
+              </li>
+              <li class="d-flex align-items-center">
+                <i class="uil uil-bath fs-6 me-1 text-secondary"></i>
+                <span class="text-muted fw-bold">{{ baths }}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
     <!--end items-->
@@ -141,3 +132,14 @@ export default defineComponent({
   },
 });
 </script>
+
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+.custom-titulo {
+  font-family: "Poppins", sans-serif;
+  color: rgb(24, 24, 24);
+  font-size: 15px;
+  font-weight: 500;
+}
+</style>
