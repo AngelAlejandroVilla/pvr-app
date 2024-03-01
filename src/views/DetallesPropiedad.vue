@@ -236,6 +236,23 @@
                   </div>
                 </li>
               </ul>
+              <div class="container">
+                <!-- v-if="showDepartureCalendar" @input="cerrarCalendario" -->
+                <!-- Calendario -->
+                <VDatePicker
+                  v-model="range"
+                  is-range
+                  class="custom-date-picker"
+                >
+                  <template #default="{ inputValue, inputEvents }">
+                    <datePickerInput
+                      :value-start="inputValue.start"
+                      :value-end="inputValue.end"
+                      v-on="inputEvents.start"
+                    />
+                  </template>
+                </VDatePicker>
+              </div>
             </div>
             <div class="p-4 rounded shadow">
               <h4 class="title">Servicios</h4>
@@ -288,10 +305,11 @@
 
 <script lang="ts">
 import { apiApp } from "@/core/api/apiApp";
-import { defineComponent, onMounted, ref, computed } from "vue";
+import { defineComponent, onMounted, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import servicesModal from "../components/modals/ServicesModal.vue";
-import type { Loading } from "element-plus/es/components/loading/src/service.mjs";
+import { DatePicker } from "v-calendar";
+import datePickerInput from "./datePickerInput.vue";
 
 export interface DepartamentoDetalle {
   idPropiedad: number;
@@ -331,6 +349,8 @@ export interface FotosPropiedad {
 export default defineComponent({
   components: {
     servicesModal,
+    VDatePicker: DatePicker,
+    datePickerInput,
   },
   props: {
     imageSrc: {
@@ -338,15 +358,45 @@ export default defineComponent({
       required: true,
     },
   },
+
   setup() {
     const route = useRoute();
     const propiedad = ref<DepartamentoDetalle>();
     const fotos = ref<FotosPropiedad[]>([]);
     const isOpen = ref(false);
     const loading = ref(false);
+    const arrivalDate = ref("Seleccionar fecha");
+    const departureDate = ref("Seleccionar fecha");
+    const showDepartureCalendar = ref(false);
+    const huespedesShow = ref(true);
+    const containerRef = ref<HTMLElement | null>(null);
+
+    const range = ref({
+      start: new Date(2024, 0, 6),
+      end: new Date(2024, 0, 10),
+    });
 
     function openDetalles() {
       isOpen.value = true;
+    }
+    function abrirCalendario() {
+      if (showDepartureCalendar.value) {
+        showDepartureCalendar.value = false;
+        huespedesShow.value = true;
+      } else {
+        showDepartureCalendar.value = true;
+        huespedesShow.value = false;
+      }
+    }
+    function cerrarCalendario() {
+      showDepartureCalendar.value = false;
+    }
+
+    function cerrarCalendarioClick(event: MouseEvent) {
+      if (containerRef.value) {
+        console.log(containerRef.value.contains(event.target as Node));
+        //cerrarCalendario();
+      }
     }
 
     onMounted(async () => {
@@ -361,13 +411,23 @@ export default defineComponent({
             loading.value = true;
           });
         });
+      document.addEventListener("click", cerrarCalendarioClick);
     });
+
     return {
       propiedad,
       isOpen,
       openDetalles,
       fotos,
       loading,
+      arrivalDate,
+      departureDate,
+      range,
+      abrirCalendario,
+      showDepartureCalendar,
+      huespedesShow,
+      cerrarCalendario,
+      containerRef,
     };
   },
 });
