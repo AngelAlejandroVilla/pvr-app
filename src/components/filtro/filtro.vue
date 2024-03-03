@@ -1,99 +1,40 @@
 <template>
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-xl-11 col-12 text-center mt-sm-0 pt-sm-0">
-        <div class="text-center features-absolute">
-          <ul
-            class="nav nav-pills bg-light shadow border-bottom flex-column flex-sm-row d-md-inline-flex nav-justified mb-0 rounded-top position-relative overflow-hidden"
-            id="pills-tab"
-            role="tablist"
-          >
-            <li class="nav-item m-1">
-              <a
-                class="nav-link py-2 px-5"
-                :class="{ active: activeTab.current === 'alquilar' }"
-                @click="toggleTab('alquilar')"
-                ref="alquilarTab"
-              >
-                <div class="text-center">
-                  <h6 class="mb-0">Alquilar</h6>
-                </div>
-              </a>
-            </li>
-            <li class="nav-item m-1">
-              <a
-                class="nav-link py-2 px-5"
-                :class="{ active: activeTab.current === 'yates' }"
-                @click="toggleTab('yates')"
-                ref="yatesTab"
-              >
-                <div class="text-center">
-                  <h6 class="mb-0">Yates</h6>
-                </div>
-              </a>
-            </li>
-            <li class="nav-item m-1">
-              <a
-                class="nav-link py-2 px-5"
-                :class="{ active: activeTab.current === 'rent' }"
-                @click="toggleTab('rent')"
-                ref="rentTab"
-              >
-                <div class="text-center">
-                  <h6 class="mb-0">Rent</h6>
-                </div>
-              </a>
-            </li>
-          </ul>
-          <div class="tab-content bg-white rounded-bottom shadow" id="pills-tabContent">
-            <div
-              class="card border-0 tab-pane fade"
-              :class="{ 'show active': activeTab.current === 'alquilar' }"
-              id="alquilar"
-              role="tabpanel"
-              ref="alquilarContent"
+  <div class="shadow-sm p-3 mb-5 bg-body-tertiary rounded mx-12" style="">
+    <VForm id="kt_modal_new_card_form" class="form">
+      <div class="row">
+        <div class="col-md-2">
+          <div class="mb-3">
+            <Field
+              name="Category"
+              class="form-select form-select-solid"
+              data-control="select2"
+              data-hide-search="true"
+              data-placeholder="Month"
+              as="select"
             >
-              <FormAlquilar />
-            </div>
-            <div
-              class="card border-0 tab-pane fade"
-              :class="{ 'show active': activeTab.current === 'yates' }"
-              id="yates"
-              role="tabpanel"
-              ref="yatesContent"
-            >
-              <FormYates />
-            </div>
-            <div
-              class="card border-0 tab-pane fade"
-              :class="{ 'show active': activeTab.current === 'rent' }"
-              id="rent"
-              role="tabpanel"
-              ref="rentContent"
-            >
-              <FormRent />
-            </div>
+              <option value="Casas">Casas</option>
+              <option value="Villas">Villas</option>
+              <option value="Departamentos">Departamentos</option>
+            </Field>
           </div>
         </div>
       </div>
-    </div>
+    </VForm>
   </div>
 </template>
 
 <script>
 import { defineComponent, ref } from "vue";
-import FormAlquilar from "./Forms/FormAlquilar.vue";
-import FormYates from "./Forms/FormYates.vue";
-import FormRent from "./Forms/FormRent.vue";
+import { ErrorMessage, Field, Form as VForm } from "vee-validate";
 
 export default defineComponent({
   components: {
-    FormAlquilar,
-    FormYates,
-    FormRent,
+    ErrorMessage,
+    Field,
+    VForm,
   },
   setup() {
-    const activeTab = ref({ current: 'alquilar' });
+    const activeTab = ref({ current: "alquilar" });
     const alquilarTab = ref(null);
     const yatesTab = ref(null);
     const rentTab = ref(null);
@@ -108,28 +49,37 @@ export default defineComponent({
           if (alquilarTab.value) alquilarTab.value.classList.add("active");
           if (yatesTab.value) yatesTab.value.classList.remove("active");
           if (rentTab.value) rentTab.value.classList.remove("active");
-          if (alquilarContent.value) alquilarContent.value.classList.add("show", "active");
-          if (yatesContent.value) yatesContent.value.classList.remove("show", "active");
-          if (rentContent.value) rentContent.value.classList.remove("show", "active");
+          if (alquilarContent.value)
+            alquilarContent.value.classList.add("show", "active");
+          if (yatesContent.value)
+            yatesContent.value.classList.remove("show", "active");
+          if (rentContent.value)
+            rentContent.value.classList.remove("show", "active");
           break;
         case "yates":
           if (yatesTab.value) yatesTab.value.classList.add("active");
           if (alquilarTab.value) alquilarTab.value.classList.remove("active");
           if (rentTab.value) rentTab.value.classList.remove("active");
-          if (yatesContent.value) yatesContent.value.classList.add("show", "active");
-          if (alquilarContent.value) alquilarContent.value.classList.remove("show", "active");
-          if (rentContent.value) rentContent.value.classList.remove("show", "active");
+          if (yatesContent.value)
+            yatesContent.value.classList.add("show", "active");
+          if (alquilarContent.value)
+            alquilarContent.value.classList.remove("show", "active");
+          if (rentContent.value)
+            rentContent.value.classList.remove("show", "active");
           break;
         case "rent":
           if (rentTab.value) rentTab.value.classList.add("active");
           if (alquilarTab.value) alquilarTab.value.classList.remove("active");
           if (yatesTab.value) yatesTab.value.classList.remove("active");
-          if (rentContent.value) rentContent.value.classList.add("show", "active");
-          if (alquilarContent.value) alquilarContent.value.classList.remove("show", "active");
-          if (yatesContent.value) yatesContent.value.classList.remove("show", "active");
+          if (rentContent.value)
+            rentContent.value.classList.add("show", "active");
+          if (alquilarContent.value)
+            alquilarContent.value.classList.remove("show", "active");
+          if (yatesContent.value)
+            yatesContent.value.classList.remove("show", "active");
           break;
       }
-    }
+    };
 
     return {
       activeTab,
@@ -139,7 +89,7 @@ export default defineComponent({
       alquilarContent,
       yatesContent,
       rentContent,
-      toggleTab
+      toggleTab,
     };
   },
 });

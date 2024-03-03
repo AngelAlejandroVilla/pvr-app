@@ -1,47 +1,59 @@
 <template>
-  <section :id="selector" class="bg-half-260 d-table w-100">
-    <div class="bg-overlay bg-black opacity-7"></div>
-    <div class="container">
-      <div class="row mt-5 justify-content-center">
-        <div class="col-12">
-          <div class="title-heading text-center">
-            <h4 class="display-4 fw-bold text-white title-dark mb-3">Find your perfect property</h4>
-            <p class="para-desc text-white-50 mb-0 mx-auto">Launch your campaign and benefit from our expertise on designing and managing conversion centered bootstrap v5 html page.</p>
-          </div>
-        </div>
-      </div><!--end row-->
-    </div> <!--end container-->
-  </section><!--end section-->
+  <div class="carousel mt-5">
+    <img :src="currentImage" alt="Slide" class="slide" />
+  </div>
 </template>
 
-<script>
-import { easy_background } from '@/assets/js/easy_background.js';
-
+<script lang="ts">
+import { ref, computed, onMounted } from "vue";
 export default {
-  props: {
-    selector: String,
-    slides: {
-      type: Array,
-      required: true
-    },
-    delay: Array,
-    transitionTiming: {
-      type: String,
-      default: "ease-in"
-    },
-    transitionDuration: {
-      type: Number,
-      default: 500
-    }
-  },
-  mounted() {
-    // Llama a la función easy_background con los argumentos apropiados
-    easy_background(this.selector, {
-      slide: this.slides,
-      delay: this.delay || [],
-      transition_timing: this.transitionTiming,
-      transition_duration: this.transitionDuration
+  setup() {
+    const images = ref([
+      "src/assets/images/real/1.jpg",
+      "src/assets/images/real/2.jpg",
+      "src/assets/images/real/3.jpg",
+    ]);
+
+    var currentIndex = ref(0);
+    var intervalId = ref(0);
+    const intervalDuration = ref(3000);
+
+    const currentImage = computed(() => {
+      return images.value[currentIndex.value];
     });
-  }
-}
+
+    function startCarousel() {
+      intervalId.value = setInterval(() => {
+        nextSlide();
+      }, intervalDuration.value);
+    }
+
+    function nextSlide() {
+      currentIndex.value = (currentIndex.value + 1) % images.value.length;
+    }
+
+    onMounted(() => {
+      startCarousel();
+    });
+
+    return {
+      currentIndex,
+      intervalId,
+      intervalDuration,
+      currentImage,
+    };
+  },
+};
 </script>
+
+<style>
+.carousel {
+  width: 100%;
+  overflow: hidden;
+}
+
+.slide {
+  width: 100%;
+  height: auto;
+}
+</style>

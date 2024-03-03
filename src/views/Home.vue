@@ -1,29 +1,9 @@
 <template>
-  <!-- Hero Start -->
-  <Carrusel :selector="'home'" :slides="slides" :delay="delay" />
-  <!-- Hero End -->
   <section class="section">
     <Filtros />
     <!--end container-->
 
     <div class="container mt-20 mt-60">
-      <div class="row justify-content-center">
-        <div class="col-12">
-          <div class="section-title mb-4 pb-2 text-center">
-            <span class="badge rounded-pill bg-soft-primary"
-              >Featured Items</span
-            >
-            <h4 class="title mt-3 mb-4">Latest Property</h4>
-            <p class="text-muted para-desc mb-0 mx-auto">
-              Start working with
-              <span class="text-primary fw-bold">Landrick</span> that can
-              provide everything you need to generate awareness, drive traffic,
-              connect.
-            </p>
-          </div>
-        </div>
-        <!--end col-->
-      </div>
       <!--end row-->
 
       <div class="row">
@@ -39,7 +19,6 @@
           :baths="deps.Baños"
           price="$5000"
           rating="5.0"
-          reviews="30"
         />
         <!-- Componente de paginación -->
         <Paginacion
@@ -141,13 +120,6 @@ export default defineComponent({
     };
 
     return {
-      slides: [
-        "@/assets/images/real/1.jpg",
-        "@/assets/images/real/2.jpg",
-        "@/assets/images/real/3.jpg",
-      ],
-      delay: [4000, 4000, 4000],
-
       departamentos,
       currentPage,
       pageSize,
