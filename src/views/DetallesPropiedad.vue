@@ -245,6 +245,7 @@
                   class="custom-date-picker"
                 >
                   <template #default="{ inputValue, inputEvents }">
+                    <!--COMO SE MUESTRA ANTES DEL CLICK-->
                     <datePickerInput
                       :value-start="inputValue.start"
                       :value-end="inputValue.end"
